@@ -60,3 +60,5 @@ const extendText = (originalText, maxLength, padText) => {
 
   return filledText;
 };
+
+const checkLength = (text, maxLength) => text.length <= maxLength;
