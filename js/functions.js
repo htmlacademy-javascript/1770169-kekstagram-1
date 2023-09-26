@@ -14,3 +14,29 @@ const checkPalindrom = (word) => {
 
   return true;
 };
+
+const getNumber = (text) => {
+  if (typeof text === 'string') {
+    let num = '';
+    for (const letter of text) {
+      if (!isNaN(parseInt(letter, 10))) {
+        num += letter;
+      }
+    }
+    return num.length === 0 ? NaN : Number(num);
+  }
+
+  if (typeof text === 'number') {
+    let number = Math.abs(text);
+
+    if (number % 1 !== 0) {
+      while (number % 1 !== 0) {
+        number *= 10;
+      }
+    }
+
+    return number;
+  }
+
+  return 'Необходимо передать строку или число.';
+};
