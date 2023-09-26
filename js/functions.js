@@ -62,3 +62,5 @@ const extendText = (originalText, maxLength, padText) => {
 };
 
 const checkLength = (text, maxLength) => text.length <= maxLength;
+
+export default {checkPalindrom, getNumber, extendText, checkLength};
