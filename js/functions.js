@@ -40,3 +40,23 @@ const getNumber = (text) => {
 
   return 'Необходимо передать строку или число.';
 };
+
+const extendText = (originalText, maxLength, padText) => {
+  if (originalText >= maxLength) {
+    return originalText;
+  }
+
+  if (padText.length + originalText.length > maxLength) {
+    const count = maxLength - originalText.length;
+    return padText.slice(0, count) + originalText;
+  }
+
+  let filledText = originalText;
+
+  while (filledText.length !== maxLength) {
+    const remainder = maxLength - filledText.length;
+    filledText = padText.substr(0, remainder) + filledText;
+  }
+
+  return filledText;
+};
