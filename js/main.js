@@ -1,9 +1,17 @@
-const NUMBER_OF_COPIES = 25;
-const NIN_LIKES = 15;
-const MAX_LIKES = 200;
-const MIN_NUMBER = 1;
-const MAX_NUMBER = 6;
-const IMAGES_DESCRIPTION = [
+const PHOTO_COUNT = 25;
+const Like = {
+  MIN: 15,
+  MAX: 200
+};
+const Avatar = {
+  MIN: 1,
+  MAX: 6
+};
+const Comment = {
+  MIN: 1,
+  MAX: 5
+};
+const IMAGE_DESCRIPTIONS = [
   'Озеро, песчанный берег, отель и лес',
   'Указатель, направление к пляжу',
   'Океан, песчанный берег, камни',
@@ -71,24 +79,24 @@ const getRandomElement = (elements) => elements[generateRandomNumber(0, elements
 
 const createComment = () => ({
   id: getId(),
-  avatar: `img/avatar-${generateRandomNumber(MIN_NUMBER, MAX_NUMBER)}.svg`,
+  avatar: `img/avatar-${generateRandomNumber(Avatar.MIN, Avatar.MAX)}.svg`,
   message: getRandomElement(USER_MESSAGES),
   name: getRandomElement(USER_NAMES)
 });
 
-const createFotoDescription = () => {
+const createPhoto = () => {
   const number = getNumber();
-  const commentsCount = generateRandomNumber(MIN_NUMBER, MAX_NUMBER);
+  const commentsCount = generateRandomNumber(Comment.MIN, Comment.MAX);
 
   return {
     id: number,
     url: `photos/${number}.jpg`,
-    description: IMAGES_DESCRIPTION[number - 1],
-    likes: generateRandomNumber(NIN_LIKES, MAX_LIKES),
+    description: IMAGE_DESCRIPTIONS[number - 1],
+    likes: generateRandomNumber(Like.MIN, Like.MAX),
     comments: Array.from({length: commentsCount}, createComment)
   };
 };
 
-const fotosDescription = Array.from({length: NUMBER_OF_COPIES}, createFotoDescription);
+const photos = Array.from({length: PHOTO_COUNT}, createPhoto);
 
-export default {fotosDescription};
+export default {photos};
