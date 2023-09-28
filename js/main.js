@@ -66,3 +66,5 @@ const generateRandomNumber = (min, max) => {
 
   return Math.floor(randomNumber);
 };
+
+const getRandomElement = (elements) => elements[generateRandomNumber(0, elements.length - 1)];
