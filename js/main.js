@@ -46,3 +46,15 @@ const USER_NAMES = [
   'Владимир',
   'Людмила'
 ];
+
+const generateNumber = () => {
+  let number = 0;
+
+  return function() {
+    number += 1;
+    return number;
+  };
+};
+
+const getNumber = generateNumber();
+const getId = generateNumber();
