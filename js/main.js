@@ -68,3 +68,10 @@ const generateRandomNumber = (min, max) => {
 };
 
 const getRandomElement = (elements) => elements[generateRandomNumber(0, elements.length - 1)];
+
+const createComment = () => ({
+  id: getId(),
+  avatar: `img/avatar-${generateRandomNumber(MIN_NUMBER, MAX_NUMBER)}.svg`,
+  message: getRandomElement(USER_MESSAGES),
+  name: getRandomElement(USER_NAMES)
+});
