@@ -75,3 +75,16 @@ const createComment = () => ({
   message: getRandomElement(USER_MESSAGES),
   name: getRandomElement(USER_NAMES)
 });
+
+const createFotoDescription = () => {
+  const number = getNumber();
+  const commentsCount = generateRandomNumber(MIN_NUMBER, MAX_NUMBER);
+
+  return {
+    id: number,
+    url: `photos/${number}.jpg`,
+    description: IMAGES_DESCRIPTION[number - 1],
+    likes: generateRandomNumber(NIN_LIKES, MAX_LIKES),
+    comments: Array.from({length: commentsCount}, createComment)
+  };
+};
