@@ -88,3 +88,7 @@ const createFotoDescription = () => {
     comments: Array.from({length: commentsCount}, createComment)
   };
 };
+
+const fotosDescription = Array.from({length: NUMBER_OF_COPIES}, createFotoDescription);
+
+export default {fotosDescription};
