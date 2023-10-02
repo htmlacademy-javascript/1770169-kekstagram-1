@@ -1,4 +1,5 @@
-import {photos} from './mocks';
+import {fragment} from './pictures-view.js';
 
-/* eslint-disable-next-line */
-console.log(photos);
+const picturesElement = document.querySelector('.pictures');
+
+picturesElement.appendChild(fragment);
