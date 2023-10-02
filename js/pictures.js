@@ -1,12 +1,15 @@
+const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
+
 export const renderPictures = (data, container) => {
-  const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
   const fragment = document.createDocumentFragment();
 
   for (const item of data) {
     const pictureElement = pictureTemplate.cloneNode(true);
-    const {url, likes, comments} = item;
+    const imageElement = pictureElement.querySelector('.picture__img');
+    const {url, likes, comments, description} = item;
 
-    pictureElement.querySelector('.picture__img').src = url;
+    imageElement.src = url;
+    imageElement.alt = description;
     pictureElement.querySelector('.picture__likes').textContent = likes;
     pictureElement.querySelector('.picture__comments').textContent = comments.length;
 
