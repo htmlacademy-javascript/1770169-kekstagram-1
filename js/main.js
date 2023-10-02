@@ -1,4 +1,6 @@
-import {photos} from './mocks';
+import {renderPictures} from './pictures.js';
+import {photos} from './mocks.js';
 
-/* eslint-disable-next-line */
-console.log(photos);
+const picturesElement = document.querySelector('.pictures');
+
+renderPictures(photos, picturesElement);

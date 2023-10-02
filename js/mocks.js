@@ -1,4 +1,4 @@
-import {generateNumber, generateRandomNumber, getRandomElement} from './utils';
+import {generateNumber, generateRandomNumber, getRandomElement} from './utils.js';
 
 const PHOTO_COUNT = 25;
 const Like = {
