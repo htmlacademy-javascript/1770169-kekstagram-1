@@ -6,12 +6,13 @@ const fragment = document.createDocumentFragment();
 
 for (const photo of photos) {
   const pictureElement = pictureTemplate.cloneNode(true);
+  const {url, likes, comments} = photo;
 
-  pictureElement.querySelector('.picture__img').src = photo.url;
-  pictureElement.querySelector('.picture__likes').textContent = photo.likes;
-  pictureElement.querySelector('.picture__comments').textContent = photo.comments.length;
+  pictureElement.querySelector('.picture__img').src = url;
+  pictureElement.querySelector('.picture__likes').textContent = likes;
+  pictureElement.querySelector('.picture__comments').textContent = comments.length;
 
-  fragment.appendChild(pictureElement);
+  fragment.append(pictureElement);
 }
 
 export {fragment};
