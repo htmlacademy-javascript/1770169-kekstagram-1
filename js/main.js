@@ -1,5 +1,6 @@
-import {fragment} from './pictures-view.js';
+import {renderPictures} from './pictures.js';
+import {photos} from './mocks.js';
 
 const picturesElement = document.querySelector('.pictures');
 
-picturesElement.append(fragment);
+renderPictures(photos, picturesElement);
