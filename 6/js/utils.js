@@ -17,10 +17,4 @@ const generateRandomNumber = (min, max) => {
 
 const getRandomElement = (elements) => elements[generateRandomNumber(0, elements.length - 1)];
 
-const getTemplate = (fragment, element) => {
-  const templateFragment = document.querySelector(fragment).content;
-
-  return templateFragment.querySelector(element);
-};
-
-export {generateNumber, generateRandomNumber, getRandomElement, getTemplate};
+export {generateNumber, generateRandomNumber, getRandomElement};
