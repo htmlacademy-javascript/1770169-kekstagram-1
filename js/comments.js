@@ -1,8 +1,14 @@
-export const renderComments = (comments, container, countComments) => {
+const commentTemplate = document.querySelector('#comment').content.querySelector('.social__comment');
+const commentsElement = document.querySelector('.social__comments');
+const commentsCountElement = document.querySelector('.comments-count');
+const socialCommentCountElement = document.querySelector('.social__comment-count');
+const commentsLoaderElement = document.querySelector('.comments-loader');
+
+export const renderComments = (comments) => {
   const fragment = document.createDocumentFragment();
 
-  for (let i = 0; i < Math.min(comments.length, countComments); i++) {
-    const commentElement = container.children[0].cloneNode(true);
+  for (let i = 0; i < comments.length; i++) {
+    const commentElement = commentTemplate.cloneNode(true);
     const {avatar, message, name} = comments[i];
     const avatarElement = commentElement.querySelector('.social__picture');
 
@@ -12,6 +18,9 @@ export const renderComments = (comments, container, countComments) => {
 
     fragment.append(commentElement);
   }
-  container.innerHTML = '';
-  container.append(fragment);
+  commentsCountElement.textContent = comments.length;
+  socialCommentCountElement.classList.add('hidden');
+  commentsLoaderElement.classList.add('hidden');
+  commentsElement.innerHTML = '';
+  commentsElement.append(fragment);
 };

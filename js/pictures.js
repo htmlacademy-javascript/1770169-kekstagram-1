@@ -10,7 +10,7 @@ export const renderPictures = (data, container) => {
 
     imageElement.src = url;
     imageElement.alt = description;
-    imageElement.id = id;
+    imageElement.dataset.id = id;
     pictureElement.querySelector('.picture__likes').textContent = likes;
     pictureElement.querySelector('.picture__comments').textContent = comments.length;
 
