@@ -4,7 +4,7 @@ const commentsCountElement = document.querySelector('.comments-count');
 const socialCommentCountElement = document.querySelector('.social__comment-count');
 const commentsLoaderElement = document.querySelector('.comments-loader');
 
-const createComment = ({avatar, message, name}) => {
+const getCommentElement = ({avatar, message, name}) => {
   const commentElement = commentTemplate.cloneNode(true);
   const avatarElement = commentElement.querySelector('.social__picture');
 
@@ -19,7 +19,7 @@ export const renderComments = (comments) => {
   const fragment = document.createDocumentFragment();
 
   for (let i = 0; i < comments.length; i++) {
-    fragment.append(createComment(comments[i]));
+    fragment.append(getCommentElement(comments[i]));
   }
   commentsCountElement.textContent = comments.length;
   socialCommentCountElement.classList.add('hidden');

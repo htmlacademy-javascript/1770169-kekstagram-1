@@ -17,13 +17,7 @@ const generateRandomNumber = (min, max) => {
 
 const getRandomElement = (elements) => elements[generateRandomNumber(0, elements.length - 1)];
 
-const getItemById = (id, items) => {
-  const result = items.find((item) => item.id === id);
-  if (result) {
-    return result;
-  }
-  return null;
-};
+const getItemById = (id, items) => items.find((item) => item.id === id);
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
