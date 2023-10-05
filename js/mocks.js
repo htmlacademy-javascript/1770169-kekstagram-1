@@ -11,7 +11,7 @@ const Avatar = {
 };
 const Comment = {
   MIN: 1,
-  MAX: 5
+  MAX: 15
 };
 const IMAGE_DESCRIPTIONS = [
   'Озеро, песчанный берег, отель и лес',

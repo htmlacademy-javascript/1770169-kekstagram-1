@@ -17,4 +17,14 @@ const generateRandomNumber = (min, max) => {
 
 const getRandomElement = (elements) => elements[generateRandomNumber(0, elements.length - 1)];
 
-export {generateNumber, generateRandomNumber, getRandomElement};
+const getItemById = (id, items) => {
+  const result = items.find((item) => item.id === id);
+  if (result) {
+    return result;
+  }
+  return null;
+};
+
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+export {generateNumber, generateRandomNumber, getRandomElement, getItemById, isEscapeKey};
