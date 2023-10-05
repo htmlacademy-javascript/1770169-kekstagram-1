@@ -2,14 +2,19 @@ import {renderComments} from './comments.js';
 import {renderBigPicture} from './big-picture.js';
 import {isEscapeKey} from './utils.js';
 
+const COMMENTS_COUNT = 5;
+let currentCount = COMMENTS_COUNT;
+let comments = [];
+
 const bodyElement = document.querySelector('body');
 const bigPictureElement = bodyElement.querySelector('.big-picture');
 const closeButtonElement = bigPictureElement.querySelector('.big-picture__cancel');
+const commentsLoaderElement = bigPictureElement.querySelector('.comments-loader');
 
 const openPicture = (photo) => {
-  const {comments} = photo;
+  comments = photo.comments;
   renderBigPicture(photo);
-  renderComments(comments);
+  renderComments(comments, currentCount);
   bigPictureElement.classList.remove('hidden');
   bodyElement.classList.add('modal-open');
   document.addEventListener('keydown', pictureCloseKeydownHandler);
@@ -18,6 +23,8 @@ const openPicture = (photo) => {
 const closePicture = () => {
   bigPictureElement.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
+  commentsLoaderElement.classList.remove('hidden');
+  currentCount = COMMENTS_COUNT;
   document.removeEventListener('keydown', pictureCloseKeydownHandler);
 };
 
@@ -31,6 +38,11 @@ function pictureCloseKeydownHandler (evt) {
   }
 }
 
+const loadMoreClickHandler = () => {
+  renderComments(comments, currentCount += COMMENTS_COUNT);
+};
+
 closeButtonElement.addEventListener('click', pictureCloseClickHandler);
+commentsLoaderElement.addEventListener('click', loadMoreClickHandler);
 
 export {openPicture};

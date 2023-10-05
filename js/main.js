@@ -6,10 +6,10 @@ import {photos} from './mocks.js';
 const picturesElement = document.querySelector('.pictures');
 
 const pictureClickHandler = (evt) => {
-  const parent = evt.target.closest('.picture');
+  const pictureElement = evt.target.closest('.picture');
 
-  if (parent) {
-    const photo = getItemById(Number(parent.getAttribute('data-id')), photos);
+  if (pictureElement) {
+    const photo = getItemById(Number(pictureElement.getAttribute('data-id')), photos);
 
     if (photo) {
       openPicture(photo);
