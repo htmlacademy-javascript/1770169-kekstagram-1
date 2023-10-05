@@ -1,18 +1,19 @@
 import {openPicture} from './picture-modal.js';
-import {getPictureById} from './utils.js';
+import {getItemById} from './utils.js';
 import {renderPictures} from './pictures.js';
 import {photos} from './mocks.js';
 
 const picturesElement = document.querySelector('.pictures');
 
 const pictureClickHandler = (evt) => {
-  if (evt.target.matches('.picture__img')) {
-    const photo = getPictureById(Number(evt.target.getAttribute('data-id')), photos);
+  const parent = evt.target.closest('.picture');
 
-    if (!photo) {
-      return 'Фото не найдено';
+  if (parent) {
+    const photo = getItemById(Number(parent.getAttribute('data-id')), photos);
+
+    if (photo) {
+      openPicture(photo);
     }
-    openPicture(photo);
   }
 };
 

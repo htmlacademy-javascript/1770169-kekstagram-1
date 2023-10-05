@@ -4,19 +4,22 @@ const commentsCountElement = document.querySelector('.comments-count');
 const socialCommentCountElement = document.querySelector('.social__comment-count');
 const commentsLoaderElement = document.querySelector('.comments-loader');
 
+const createComment = ({avatar, message, name}) => {
+  const commentElement = commentTemplate.cloneNode(true);
+  const avatarElement = commentElement.querySelector('.social__picture');
+
+  avatarElement.src = avatar;
+  avatarElement.alt = name;
+  commentElement.querySelector('.social__text').textContent = message;
+
+  return commentElement;
+};
+
 export const renderComments = (comments) => {
   const fragment = document.createDocumentFragment();
 
   for (let i = 0; i < comments.length; i++) {
-    const commentElement = commentTemplate.cloneNode(true);
-    const {avatar, message, name} = comments[i];
-    const avatarElement = commentElement.querySelector('.social__picture');
-
-    avatarElement.src = avatar;
-    avatarElement.alt = name;
-    commentElement.querySelector('.social__text').textContent = message;
-
-    fragment.append(commentElement);
+    fragment.append(createComment(comments[i]));
   }
   commentsCountElement.textContent = comments.length;
   socialCommentCountElement.classList.add('hidden');

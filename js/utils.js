@@ -17,14 +17,14 @@ const generateRandomNumber = (min, max) => {
 
 const getRandomElement = (elements) => elements[generateRandomNumber(0, elements.length - 1)];
 
-const getPictureById = (id, pictures) => {
-  const result = pictures.filter((item) => item.id === id);
+const getItemById = (id, items) => {
+  const result = items.find((item) => item.id === id);
   if (result) {
-    return result[0];
+    return result;
   }
   return null;
 };
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-export {generateNumber, generateRandomNumber, getRandomElement, getPictureById, isEscapeKey};
+export {generateNumber, generateRandomNumber, getRandomElement, getItemById, isEscapeKey};
