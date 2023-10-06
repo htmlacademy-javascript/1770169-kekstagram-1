@@ -17,13 +17,13 @@ const getCommentElement = ({avatar, message, name}) => {
 
 export const renderComments = (comments, countComments) => {
   const fragment = document.createDocumentFragment();
-  const minComments = Math.min(comments.length, countComments);
+  const shownCommentsAmount = Math.min(comments.length, countComments);
 
-  for (let i = 0; i < minComments; i++) {
+  for (let i = 0; i < shownCommentsAmount; i++) {
     fragment.append(getCommentElement(comments[i]));
   }
   commentsCountElement.textContent = comments.length;
-  currentComments.textContent = minComments;
+  currentComments.textContent = shownCommentsAmount;
 
   if (comments.length <= countComments) {
     commentsLoaderElement.classList.add('hidden');
