@@ -2,6 +2,7 @@ import {openPicture} from './picture-modal.js';
 import {getItemById} from './utils.js';
 import {renderPictures} from './pictures.js';
 import {photos} from './mocks.js';
+import './upload-form.js';
 
 const picturesElement = document.querySelector('.pictures');
 
