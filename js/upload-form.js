@@ -1,4 +1,4 @@
-import {pristine} from './validate.js';
+import {checkFormValidity} from './validate.js';
 import {isEscapeKey} from './utils.js';
 
 const bodyElement = document.querySelector('body');
@@ -7,26 +7,30 @@ const uploadFieldElement = uploadForm .querySelector('.img-upload__input');
 const uploadOverlayElement = uploadForm .querySelector('.img-upload__overlay');
 const closeButtonElement = uploadOverlayElement .querySelector('.img-upload__cancel');
 
-const closeImage = () => {
-  uploadOverlayElement.classList.add('hidden');
-  bodyElement.classList.remove('modal-open');
-  uploadFieldElement.value = '';
-  document.removeEventListener('keydown', imageCloseKeydownHandler);
-};
-
 const openImage = () => {
   uploadOverlayElement.classList.remove('hidden');
   bodyElement.classList.add('modal-open');
+  closeButtonElement.addEventListener('click', closeButtonClickHandler);
   document.addEventListener('keydown', imageCloseKeydownHandler);
+  uploadForm.addEventListener('submit', formSubmitHandler);
+};
+
+const closeImage = () => {
+  uploadOverlayElement.classList.add('hidden');
+  bodyElement.classList.remove('modal-open');
+  uploadForm.reset();
+  closeButtonElement.removeEventListener('click', closeButtonClickHandler);
+  document.removeEventListener('keydown', imageCloseKeydownHandler);
+  uploadForm.removeEventListener('submit', formSubmitHandler);
 };
 
 const uploadFieldChangeHandler = () => {
   openImage();
 };
 
-const closeButtonClickHandler = () => {
+function closeButtonClickHandler () {
   closeImage();
-};
+}
 
 function imageCloseKeydownHandler (evt) {
   const focused = document.activeElement.tagName.toLowerCase();
@@ -35,14 +39,10 @@ function imageCloseKeydownHandler (evt) {
   }
 }
 
-const formSubmitHandler = (evt) => {
-  evt.preventDefault();
-  if (!pristine.validate()) {
-    // eslint-disable-next-line
-    console.log('Ошибка валидации!');
+function formSubmitHandler (evt) {
+  if (!checkFormValidity()) {
+    evt.preventDefault();
   }
-};
+}
 
 uploadFieldElement.addEventListener('change', uploadFieldChangeHandler);
-closeButtonElement.addEventListener('click', closeButtonClickHandler);
-uploadForm.addEventListener('submit', formSubmitHandler);

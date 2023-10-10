@@ -3,56 +3,99 @@ const Hashtag = {
   MAX_COUNT: 5
 };
 const COMMENT_MAX_LENGTH = 140;
-let message = '';
 
 const uploadForm = document.querySelector('.img-upload__form');
-const heshtagFiled = uploadForm.querySelector('.text__hashtags');
-const commentFiled = uploadForm.querySelector('.text__descriptio');
+const hashtagFiled = uploadForm.querySelector('.text__hashtags');
+const commentFiled = uploadForm.querySelector('.text__description');
 
-const pristine = new Pristine(uploadForm);
+const pristine = new Pristine(uploadForm, {
+  classTo: 'img-upload__text',
+  errorClass: 'text--error',
+  successClass: 'text--success',
+  errorTextParent: 'img-upload__text',
+  errorTextTag: 'div',
+  errorTextClass: 'text__error-message'
+});
 
-const validateHeshtag = (value) => {
+const getArrayFromString = (value) => value.trim().split(' ').filter((item) => item.trim().length);
+
+const validateHashtagCount = (value) => {
+  const items = getArrayFromString(value);
+
+  return items.length < Hashtag.MAX_COUNT;
+};
+
+const validateHashtagLength = (value) => {
   const items = value.split(' ');
-  const regexp = /^[а-яёa-z0-9]+$/i;
 
-  if (items.length > Hashtag.MAX_COUNT) {
-    message = `Нельзя указать больше ${Hashtag.MAX_COUNT} хэш-тегов;`;
-    return false;
-  }
-
-  for (let i = 0; i < items.length; i++) {
-    switch(false) {
-      case items[i][0] === '#':
-        message = 'Хэш-тег начинается с символа #.';
-        return false;
-      case items[i].length !== 1:
-        message = 'Хеш-тег не может состоять только из одного символа #.';
-        return false;
-      case items[i].length < Hashtag.MAX_LENGTH:
-        message = `Максимальная длина одного хэш-тега ${Hashtag.MAX_LENGTH} символов, включая решётку.`;
-        return false;
-      case regexp.test(items[i].slice(1)):
-        message = 'Строка после решётки должна состоять из букв и чисел.';
-        return false;
-      case items.slice(i + 1).every((item) => item !== items[i]):
-        message = 'Один и тот же хэш-тег не может быть использован дважды.';
-        return false;
+  for (const item of items) {
+    if (item.length > Hashtag.MAX_LENGTH) {
+      return false;
     }
   }
-  message = '';
+
   return true;
 };
 
-const validateComments = (value) => {
-  if (value.length > COMMENT_MAX_LENGTH) {
-    message = `Длина комментария не может составлять больше ${COMMENT_MAX_LENGTH} символов`;
-    return false;
+const validateHashtagUnique = (value) => {
+  const items = getArrayFromString(value);
+
+  for (let i = 0; i < items.length; i++) {
+    if (items.slice(i + 1).some((item) => item === items[i])) {
+      return false;
+    }
   }
-  message = '';
+
   return true;
 };
 
-pristine.addValidator(heshtagFiled, validateHeshtag, message);
-pristine.addValidator(commentFiled, validateComments, message);
+const validateHashtagOnly = (value) => {
+  const items = getArrayFromString(value);
 
-export {pristine};
+  for (const item of items) {
+    if (item.length === 1) {
+      return false;
+    }
+  }
+
+  return true;
+};
+
+const validateHashtagSingl = (value) => {
+  const items = getArrayFromString(value);
+
+  for (const item of items) {
+    if (item[0] !== '#') {
+      return false;
+    }
+  }
+
+  return true;
+};
+
+const validateHashtagMatch = (value) => {
+  const items = getArrayFromString(value);
+  const regexp = /^[а-яёa-z0-9]+$/i;
+
+  for (const item of items) {
+    if (!regexp.test(item.slice(1))) {
+      return false;
+    }
+  }
+
+  return true;
+};
+
+const validateComments = (value) => value.length < COMMENT_MAX_LENGTH;
+
+pristine.addValidator(hashtagFiled, validateHashtagCount, `Нельзя указать больше ${Hashtag.MAX_COUNT} хэш-тегов!`, 1, true);
+pristine.addValidator(hashtagFiled, validateHashtagLength, `Максимальная длина одного хэш-тега ${Hashtag.MAX_LENGTH} символов, включая решётку!`, true);
+pristine.addValidator(hashtagFiled, validateHashtagUnique,'Один и тот же хэш-тег не может быть использован дважды!', true);
+pristine.addValidator(hashtagFiled, validateHashtagOnly,'Хеш-тег не может состоять только из одного символа #!', 3, true);
+pristine.addValidator(hashtagFiled, validateHashtagSingl,'Хэш-тег начинается с символа #!', 4, true);
+pristine.addValidator(hashtagFiled, validateHashtagMatch,'Строка после решётки должна состоять из букв и чисел!', true);
+pristine.addValidator(commentFiled, validateComments, `Длина комментария не может составлять больше ${COMMENT_MAX_LENGTH} символов!`);
+
+const checkFormValidity = () => pristine.validate();
+
+export {checkFormValidity};
