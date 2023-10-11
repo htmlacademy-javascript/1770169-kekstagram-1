@@ -79,8 +79,6 @@ const openSlider = () => {
 };
 
 const closeSlider = () => {
-  uploadImageElement.removeAttribute('class');
-  uploadImageElement.style.filter = null;
   filterElement.classList.add('hidden');
 };
 
@@ -94,7 +92,10 @@ function effectsChangeHandler (evt) {
   }
 }
 
-const resetSlider = () => sliderElement.noUiSlider.updateOptions(EFFECTS_VALUES.none);
+const resetSlider = () => {
+  sliderElement.noUiSlider.updateOptions(EFFECTS_VALUES.none);
+  closeSlider();
+};
 
 sliderElement.noUiSlider.on('update', () => {
   const value = parseFloat(sliderElement.noUiSlider.get());
@@ -120,6 +121,8 @@ sliderElement.noUiSlider.on('update', () => {
       sliderFieldElement.value = value;
   }
 });
+
+closeSlider();
 
 effectsElement.addEventListener('change', effectsChangeHandler);
 
