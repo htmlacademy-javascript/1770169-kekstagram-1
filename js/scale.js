@@ -7,14 +7,15 @@ const uploadImageElement = document.querySelector('.img-upload__preview img');
 const Scale = {
   STEP: 25,
   MIM: 25,
-  MAX: 100
+  MAX: 100,
+  DEFAULT: 100
 };
 
 let scaleValue = parseInt(scaleFieldElement.value, 10);
 
 const changeValue = () => {
   scaleFieldElement.value = `${scaleValue}%`;
-  uploadImageElement.style.scale = scaleValue / 100;
+  uploadImageElement.style.transform = `scale(${scaleValue / 100})`;
   scaleBiggerButtonElement.disabled = false;
   scaleSmallerButtonElement.disabled = false;
 };
@@ -37,5 +38,12 @@ function scaleBiggerButtonClickHandler () {
   }
 }
 
+const resetScale = () => {
+  scaleFieldElement.value = `${Scale.DEFAULT}%`;
+  uploadImageElement.style.transform = `scale(${Scale.DEFAULT / 100})`;
+};
+
 scaleSmallerButtonElement.addEventListener('click', scaleSmallButtonClickHandler);
 scaleBiggerButtonElement.addEventListener('click', scaleBiggerButtonClickHandler);
+
+export {resetScale};
