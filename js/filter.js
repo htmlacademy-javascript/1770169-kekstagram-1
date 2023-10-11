@@ -1,7 +1,7 @@
 const filterElement = document.querySelector('.img-upload__effect-level');
 const sliderElement = filterElement.querySelector('.effect-level__slider');
 const sliderFieldElement = filterElement.querySelector('.effect-level__value');
-const radioButtonElements = document.querySelectorAll('.effects__radio');
+const effectsElement = document.querySelector('.effects__list');
 const uploadImageElement = document.querySelector('.img-upload__preview img');
 
 const Filters = {
@@ -13,7 +13,7 @@ const Filters = {
   HEAT: 'heat'
 };
 
-const Effects = {
+const EFFECTS = {
   chrome: 'grayscale',
   sepia: 'sepia',
   marvin: 'invert',
@@ -21,7 +21,7 @@ const Effects = {
   heat: 'brightness',
 };
 
-const EffectsValues = {
+const EFFECTS_VALUES = {
   none: {
     range: {
       min: 0,
@@ -72,15 +72,7 @@ const EffectsValues = {
   },
 };
 
-noUiSlider.create(sliderElement, {
-  range: {
-    min: 0,
-    max: 100,
-  },
-  start: 100,
-  step: 1,
-  connect: 'lower',
-});
+noUiSlider.create(sliderElement, {...EFFECTS_VALUES.none, connect: 'lower'});
 
 const openSlider = () => {
   filterElement.classList.remove('hidden');
@@ -89,17 +81,20 @@ const openSlider = () => {
 const closeSlider = () => {
   uploadImageElement.removeAttribute('class');
   uploadImageElement.style.filter = null;
-  sliderElement.noUiSlider.destroy();
   filterElement.classList.add('hidden');
 };
 
-function radioButtonChangeHandler (evt) {
-  const value = evt.target.value;
-  uploadImageElement.removeAttribute('class');
-  uploadImageElement.classList.add(`effects__preview--${value}`);
-  uploadImageElement.dataset.type = value;
-  sliderElement.noUiSlider.updateOptions(EffectsValues[value]);
+function effectsChangeHandler (evt) {
+  if (evt.target.matches('.effects__radio')) {
+    const value = evt.target.value;
+    uploadImageElement.removeAttribute('class');
+    uploadImageElement.classList.add(`effects__preview--${value}`);
+    uploadImageElement.dataset.type = value;
+    sliderElement.noUiSlider.updateOptions(EFFECTS_VALUES[value]);
+  }
 }
+
+const resetSlider = () => sliderElement.noUiSlider.updateOptions(EFFECTS_VALUES.none);
 
 sliderElement.noUiSlider.on('update', () => {
   const value = parseFloat(sliderElement.noUiSlider.get());
@@ -111,21 +106,21 @@ sliderElement.noUiSlider.on('update', () => {
       break;
     case Filters.PHOBOS:
       openSlider();
-      uploadImageElement.style.filter = `${Effects[type]}(${value}px)`;
+      uploadImageElement.style.filter = `${EFFECTS[type]}(${value}px)`;
       sliderFieldElement.value = value;
       break;
     case Filters.MARVIN:
       openSlider();
-      uploadImageElement.style.filter = `${Effects[type]}(${value}%)`;
+      uploadImageElement.style.filter = `${EFFECTS[type]}(${value}%)`;
       sliderFieldElement.value = value;
       break;
     default:
       openSlider();
-      uploadImageElement.style.filter = `${Effects[type]}(${value})`;
+      uploadImageElement.style.filter = `${EFFECTS[type]}(${value})`;
       sliderFieldElement.value = value;
   }
 });
 
-for (const element of radioButtonElements) {
-  element.addEventListener('change', radioButtonChangeHandler);
-}
+effectsElement.addEventListener('change', effectsChangeHandler);
+
+export {resetSlider};
