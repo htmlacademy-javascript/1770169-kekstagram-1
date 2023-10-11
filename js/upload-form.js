@@ -1,5 +1,6 @@
 import {checkFormValidity} from './validate.js';
 import {isEscapeKey} from './utils.js';
+import './scale.js';
 
 const bodyElement = document.querySelector('body');
 const uploadForm = bodyElement.querySelector('.img-upload__form');
