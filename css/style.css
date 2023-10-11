@@ -1408,3 +1408,37 @@ main {
 .hidden {
   display: none;
 }
+
+.text--error {
+  position: relative;
+}
+
+.text--error .text__error-message {
+  color: #800000;
+  border-color: #622104;
+}
+
+
+.text--success .text__error-message{
+  color: #228b22;
+  border-color: #006400;
+}
+
+.text__error-message {
+  position: absolute;
+  left: 50%;
+  top: -75%;
+  padding: 2px 5px;
+  font-size: 12px;
+  font-weight: 600;
+  background-color: #d3d3d3;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  transform: translateX(-50%);
+  animation: error-animation 1s forwards;
+}
+
+@keyframes error-animation {
+  0% {transform: translateX(-100%);}
+  50% {transform: translateY(0);}
+}
