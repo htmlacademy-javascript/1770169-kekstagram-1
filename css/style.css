@@ -1427,7 +1427,7 @@ main {
 .text__error-message {
   position: absolute;
   left: 50%;
-  top: -75%;
+  top: -198%;
   padding: 2px 5px;
   font-size: 12px;
   font-weight: 600;
