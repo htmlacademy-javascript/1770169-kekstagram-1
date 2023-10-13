@@ -1,7 +1,7 @@
 import {checkFormValidity} from './validate.js';
 import {isEscapeKey} from './utils.js';
 import {resetScale} from './scale.js';
-import {resetSlider} from './filters.js';
+import {resetSlider} from './effects.js';
 
 const bodyElement = document.querySelector('body');
 const uploadForm = bodyElement.querySelector('.img-upload__form');

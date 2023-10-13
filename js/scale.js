@@ -1,7 +1,7 @@
 const scaleElement = document.querySelector('.img-upload__scale');
-const scaleSmallerButtonElement = scaleElement.querySelector('.scale__control--smaller');
-const scaleBiggerButtonElement = scaleElement.querySelector('.scale__control--bigger');
-const scaleFieldElement = scaleElement.querySelector('.scale__control--value');
+const smallerButtonElement = scaleElement.querySelector('.scale__control--smaller');
+const biggerButtonElement = scaleElement.querySelector('.scale__control--bigger');
+const fieldElement = scaleElement.querySelector('.scale__control--value');
 const uploadImageElement = document.querySelector('.img-upload__preview img');
 
 const Scale = {
@@ -11,39 +11,32 @@ const Scale = {
   DEFAULT: 100
 };
 
-let scaleValue = parseInt(scaleFieldElement.value, 10);
+let scaleValue = parseInt(fieldElement.value, 10);
 
-const changeValue = () => {
-  scaleFieldElement.value = `${scaleValue}%`;
-  uploadImageElement.style.transform = `scale(${scaleValue / 100})`;
-  scaleBiggerButtonElement.disabled = false;
-  scaleSmallerButtonElement.disabled = false;
+const setScale = (value) => {
+  fieldElement.value = `${value}%`;
+  uploadImageElement.style.transform = `scale(${value / 100})`;
 };
 
-function scaleSmallButtonClickHandler () {
+function smallButtonClickHandler () {
   if (scaleValue > Scale.MIM) {
     scaleValue -= Scale.STEP;
-    changeValue();
-  } else {
-    scaleSmallerButtonElement.disabled = true;
+    setScale(scaleValue);
   }
 }
 
-function scaleBiggerButtonClickHandler () {
+function biggerButtonClickHandler () {
   if (scaleValue < Scale.MAX) {
     scaleValue += Scale.STEP;
-    changeValue();
-  } else {
-    scaleBiggerButtonElement.disabled = true;
+    setScale(scaleValue);
   }
 }
 
 const resetScale = () => {
-  scaleFieldElement.value = `${Scale.DEFAULT}%`;
-  uploadImageElement.style.transform = `scale(${Scale.DEFAULT / 100})`;
+  setScale(Scale.DEFAULT);
 };
 
-scaleSmallerButtonElement.addEventListener('click', scaleSmallButtonClickHandler);
-scaleBiggerButtonElement.addEventListener('click', scaleBiggerButtonClickHandler);
+smallerButtonElement.addEventListener('click', smallButtonClickHandler);
+biggerButtonElement.addEventListener('click', biggerButtonClickHandler);
 
 export {resetScale};
