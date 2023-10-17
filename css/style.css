@@ -1442,3 +1442,13 @@ main {
   0% {transform: translateX(-100%);}
   50% {transform: translateY(0);}
 }
+
+.alert-message {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  padding: 10px 5px;
+  background-color: rebeccapurple;
+  border-radius: 5px;
+  transform: translateX(-50%);
+}

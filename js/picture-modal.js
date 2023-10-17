@@ -17,7 +17,7 @@ const openPicture = (photo) => {
   renderComments(comments, currentCount);
   bigPictureElement.classList.remove('hidden');
   bodyElement.classList.add('modal-open');
-  document.addEventListener('keydown', pictureCloseKeydownHandler);
+  document.addEventListener('keydown', documentKeydownHandler);
 };
 
 const closePicture = () => {
@@ -25,14 +25,14 @@ const closePicture = () => {
   bodyElement.classList.remove('modal-open');
   commentsLoaderElement.classList.remove('hidden');
   currentCount = COMMENTS_COUNT;
-  document.removeEventListener('keydown', pictureCloseKeydownHandler);
+  document.removeEventListener('keydown', documentKeydownHandler);
 };
 
 const pictureCloseClickHandler = () => {
   closePicture();
 };
 
-function pictureCloseKeydownHandler (evt) {
+function documentKeydownHandler (evt) {
   if (isEscapeKey(evt)) {
     closePicture();
   }
