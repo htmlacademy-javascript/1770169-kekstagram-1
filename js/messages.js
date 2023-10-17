@@ -10,7 +10,7 @@ const createMessage = (template) => {
 };
 
 const successMessage = createMessage(successTemplate);
-const errorMessaage = createMessage(errorTemplate);
+const errorMessage = createMessage(errorTemplate);
 
 const showSuccessMessage = () => {
   bodyElement.append(successMessage);
@@ -21,8 +21,8 @@ const showSuccessMessage = () => {
 };
 
 const showErrorMessage = () => {
-  bodyElement.append(errorMessaage);
-  const errorButton = errorMessaage.querySelector('.error__button');
+  bodyElement.append(errorMessage);
+  const errorButton = errorMessage.querySelector('.error__button');
   errorButton.addEventListener('click', errorButtonClickHandler);
   document.addEventListener('keydown', documentKeydownHandler);
   document.addEventListener('click', documentClickHandler);
@@ -49,7 +49,7 @@ function successButtonClickHandler () {
 }
 
 function errorButtonClickHandler () {
-  hideMessage(errorMessaage);
+  hideMessage(errorMessage);
 }
 
 function documentKeydownHandler (evt) {
@@ -59,12 +59,12 @@ function documentKeydownHandler (evt) {
       return;
     }
 
-    hideMessage(errorMessaage);
+    hideMessage(errorMessage);
   }
 }
 
 function documentClickHandler (evt) {
-  if (errorMessaage === evt.target || successMessage === evt.target) {
+  if (errorMessage === evt.target || successMessage === evt.target) {
     hideMessage(evt.target);
   }
 }

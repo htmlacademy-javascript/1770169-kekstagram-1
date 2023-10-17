@@ -3,7 +3,7 @@ import {isEscapeKey} from './utils.js';
 import {resetScale} from './scale.js';
 import {resetSlider} from './effects.js';
 import {sendData} from './api.js';
-import {showSuccessMessage, showErrorMessage} from './message.js';
+import {showSuccessMessage, showErrorMessage} from './messages.js';
 
 const bodyElement = document.querySelector('body');
 const uploadForm = bodyElement.querySelector('.img-upload__form');
