@@ -1,12 +1,3 @@
-/* const generateNumber = () => {
-  let number = 0;
-
-  return function() {
-    number += 1;
-    return number;
-  };
-}; */
-
 const generateRandomNumber = (min, max) => {
   const minNumber = Math.ceil(Math.min(Math.abs(min), Math.abs(max)));
   const maxNumber = Math.floor(Math.max(Math.abs(min), Math.abs(max)));
@@ -26,8 +17,8 @@ function debounce (callback, timeoutDelay = 500) {
 
   return (...rest) => {
     clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+    timeoutId = setTimeout(() => callback(...rest), timeoutDelay);
   };
 }
 
-export {/* generateNumber, */ generateRandomNumber, getRandomElement, getItemById, isEscapeKey, debounce};
+export {generateRandomNumber, getRandomElement, getItemById, isEscapeKey, debounce};
