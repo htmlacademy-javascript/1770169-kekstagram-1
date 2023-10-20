@@ -1,3 +1,4 @@
+import {debouncedRenderPicture} from './pictures.js';
 import {getRandomElement} from './utils.js';
 
 const Filter = {
@@ -7,6 +8,11 @@ const Filter = {
 };
 
 const COUNT_PHOTO = 10;
+
+const picturesElement = document.querySelector('.pictures');
+const filtersElement = document.querySelector('.img-filters');
+const formElement = document.querySelector('.img-filters__form');
+const buttonElements = document.querySelectorAll('.img-filters__button');
 
 const getRandomPhotos = (photos) => {
   const randomPhotos = new Set();
@@ -30,4 +36,20 @@ const getSortedPhotos = (filterType, photos) => {
   }
 };
 
-export {getSortedPhotos};
+const filtersClickHandler = (evt, photos) => {
+  const buttonElement = evt.target;
+
+  if (buttonElement.matches('.img-filters__button')) {
+    buttonElements.forEach((element) => element.classList.remove('img-filters__button--active'));
+    buttonElement.classList.add('img-filters__button--active');
+    const sortedPhotos = getSortedPhotos(buttonElement.id, photos);
+    debouncedRenderPicture(sortedPhotos, picturesElement);
+  }
+};
+
+const initFilters = (photos) => {
+  filtersElement.classList.remove('img-filters--inactive');
+  formElement.addEventListener('click', (evt) => filtersClickHandler(evt, photos));
+};
+
+export {initFilters};

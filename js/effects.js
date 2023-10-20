@@ -81,6 +81,8 @@ const showSlider = () => {
 
 const hideSlider = () => {
   effectElement.classList.add('hidden');
+  uploadImageElement.removeAttribute('class');
+  uploadImageElement.removeAttribute('style');
 };
 
 function effectChangeHandler (evt) {
@@ -95,7 +97,6 @@ function effectChangeHandler (evt) {
 
 const resetSlider = () => {
   sliderElement.noUiSlider.updateOptions(EFFECT_CONFIG.none);
-  uploadImageElement.removeAttribute('style');
   hideSlider();
 };
 
@@ -114,7 +115,6 @@ sliderElement.noUiSlider.on('update', () => {
   const type = uploadImageElement.dataset.type;
 
   if (type === Effect.NONE) {
-    uploadImageElement.removeAttribute('style');
     return hideSlider();
   }
 
