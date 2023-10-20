@@ -81,6 +81,8 @@ const showSlider = () => {
 
 const hideSlider = () => {
   effectElement.classList.add('hidden');
+  uploadImageElement.removeAttribute('class');
+  uploadImageElement.removeAttribute('style');
 };
 
 function effectChangeHandler (evt) {

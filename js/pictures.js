@@ -1,3 +1,8 @@
+import {debounce} from './utils.js';
+
+const DELAY = 500;
+
+const picturesElement = document.querySelector('.pictures');
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
 const getPictureElement = ({id, url, likes, comments, description}) => {
@@ -13,11 +18,17 @@ const getPictureElement = ({id, url, likes, comments, description}) => {
   return pictureElement;
 };
 
-export const renderPictures = (data, container) => {
+const renderPictures = (data) => {
+  const pictureElements = picturesElement.querySelectorAll('.picture');
   const fragment = document.createDocumentFragment();
 
+  pictureElements.forEach((element) => element.remove());
   for (const item of data) {
     fragment.append(getPictureElement(item));
   }
-  container.append(fragment);
+  picturesElement.append(fragment);
 };
+
+const debouncedRenderPicture = debounce(renderPictures, DELAY);
+
+export {debouncedRenderPicture, renderPictures};

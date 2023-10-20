@@ -1,30 +1,16 @@
-import {openPicture} from './picture-modal.js';
-import {getItemById} from './utils.js';
+import {initPictures} from './picture-modal.js';
 import {renderPictures} from './pictures.js';
 import {getData} from './api.js';
-import {showAlert} from './message.js';
+import {showAlert} from './messages.js';
+import {initFilters} from './filters.js';
 import './upload-form.js';
-
-const picturesElement = document.querySelector('.pictures');
-
-const pictureClickHandler = (evt, photos) => {
-  const pictureElement = evt.target.closest('.picture');
-
-  if (pictureElement) {
-    const photo = getItemById(Number(pictureElement.getAttribute('data-id')), photos);
-
-    if (photo) {
-      openPicture(photo);
-    }
-  }
-};
 
 getData()
   .then((data) => {
-    renderPictures(data, picturesElement);
-    picturesElement.addEventListener('click', (evt) => pictureClickHandler(evt, data));
+    renderPictures(data);
+    initFilters(data);
+    initPictures(data);
   })
   .catch((error) => {
     showAlert(error);
   });
-

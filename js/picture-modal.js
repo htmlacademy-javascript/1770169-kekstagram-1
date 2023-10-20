@@ -1,6 +1,6 @@
 import {renderComments} from './comments.js';
 import {renderBigPicture} from './big-picture.js';
-import {isEscapeKey} from './utils.js';
+import {isEscapeKey, getItemById} from './utils.js';
 
 const COMMENTS_COUNT = 5;
 let currentCount = COMMENTS_COUNT;
@@ -10,6 +10,7 @@ const bodyElement = document.querySelector('body');
 const bigPictureElement = bodyElement.querySelector('.big-picture');
 const closeButtonElement = bigPictureElement.querySelector('.big-picture__cancel');
 const commentsLoaderElement = bigPictureElement.querySelector('.comments-loader');
+const picturesElement = bodyElement.querySelector('.pictures');
 
 const openPicture = (photo) => {
   comments = photo.comments;
@@ -42,7 +43,23 @@ const loadMoreClickHandler = () => {
   renderComments(comments, currentCount += COMMENTS_COUNT);
 };
 
+const pictureClickHandler = (evt, photos) => {
+  const pictureElement = evt.target.closest('.picture');
+
+  if (pictureElement) {
+    const photo = getItemById(Number(pictureElement.getAttribute('data-id')), photos);
+
+    if (photo) {
+      openPicture(photo);
+    }
+  }
+};
+
 closeButtonElement.addEventListener('click', pictureCloseClickHandler);
 commentsLoaderElement.addEventListener('click', loadMoreClickHandler);
 
-export {openPicture};
+const initPictures = (data) => {
+  picturesElement.addEventListener('click', (evt) => pictureClickHandler(evt, data));
+};
+
+export {initPictures};
