@@ -12,13 +12,13 @@ const getItemById = (id, items) => items.find((item) => item.id === id);
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-function debounce (callback, timeoutDelay = 500) {
+const debounce = (callback, timeoutDelay = 500) => {
   let timeoutId;
 
-  return (...rest) => {
+  return (...args) => {
     clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => callback(...rest), timeoutDelay);
+    timeoutId = setTimeout(() => callback(...args), timeoutDelay);
   };
-}
+};
 
 export {generateRandomNumber, getRandomElement, getItemById, isEscapeKey, debounce};

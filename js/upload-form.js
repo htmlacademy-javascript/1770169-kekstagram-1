@@ -11,14 +11,14 @@ const uploadFieldElement = uploadForm .querySelector('.img-upload__input');
 const uploadOverlayElement = uploadForm .querySelector('.img-upload__overlay');
 const closeButtonElement = uploadOverlayElement .querySelector('.img-upload__cancel');
 const submitButton = uploadOverlayElement.querySelector('.img-upload__submit');
-const uploadImage = uploadOverlayElement.querySelector('.img-upload__preview img');
+//const uploadImage = uploadOverlayElement.querySelector('.img-upload__preview img'); пока закоментил, до module12-task2
 
-let imageURL = '';
+//let imageURL = ''; пока закоментил, до module12-task2
 
-const openImage = (image) => {
+const openImage = () => {
   uploadOverlayElement.classList.remove('hidden');
   bodyElement.classList.add('modal-open');
-  uploadImage.src = image;
+  //uploadImage.src = imageURL; пока закоментил, до module12-task2
   closeButtonElement.addEventListener('click', closeButtonClickHandler);
   document.addEventListener('keydown', documentKeydownHandler);
   uploadForm.addEventListener('submit', formSubmitHandler);
@@ -30,15 +30,15 @@ const closeImage = () => {
   uploadForm.reset();
   resetScale();
   resetSlider();
-  URL.revokeObjectURL(imageURL);
+  //URL.revokeObjectURL(imageURL); пока закоментил, до module12-task2
   closeButtonElement.removeEventListener('click', closeButtonClickHandler);
   document.removeEventListener('keydown', documentKeydownHandler);
   uploadForm.removeEventListener('submit', formSubmitHandler);
 };
 
-const uploadFieldChangeHandler = (evt) => {
-  imageURL = URL.createObjectURL(evt.target.files[0]);
-  openImage(imageURL);
+const uploadFieldChangeHandler = () => {
+  //imageURL = URL.createObjectURL(evt.target.files[0]); пока закоментил, до module12-task2
+  openImage();
 };
 
 function closeButtonClickHandler () {
