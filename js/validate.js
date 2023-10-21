@@ -1,10 +1,12 @@
+import {formElement} from './elements.js';
+
 const Hashtag = {
   MAX_LENGTH: 20,
   MAX_COUNT: 5
 };
 const COMMENT_MAX_LENGTH = 140;
 
-const formElement = document.querySelector('.img-upload__form');
+//const formElement = document.querySelector('.img-upload__form');
 const hashtagsElement = formElement.querySelector('.text__hashtags');
 const commentElement = formElement.querySelector('.text__description');
 

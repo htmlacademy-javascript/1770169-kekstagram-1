@@ -1,4 +1,5 @@
-const bigPictureElement = document.querySelector('.big-picture');
+import {bigPictureElement} from './elements.js';
+
 const imageElement = bigPictureElement.querySelector('.big-picture__img img');
 const likesElement = bigPictureElement.querySelector('.likes-count');
 const captionElement = bigPictureElement.querySelector('.social__caption');

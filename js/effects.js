@@ -1,8 +1,9 @@
+import {uploadImageElement} from './elements.js';
+
 const effectElement = document.querySelector('.img-upload__effect-level');
 const sliderElement = effectElement.querySelector('.effect-level__slider');
 const sliderFieldElement = effectElement.querySelector('.effect-level__value');
 const effectsElement = document.querySelector('.effects__list');
-const uploadImageElement = document.querySelector('.img-upload__preview img');
 
 const Effect = {
   NONE: 'none',
@@ -82,7 +83,7 @@ const showSlider = () => {
 const hideSlider = () => {
   effectElement.classList.add('hidden');
   uploadImageElement.removeAttribute('class');
-  uploadImageElement.removeAttribute('style');
+  uploadImageElement.style.filter = 'none';
 };
 
 function effectChangeHandler (evt) {

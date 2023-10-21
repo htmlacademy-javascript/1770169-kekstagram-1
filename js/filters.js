@@ -1,5 +1,6 @@
 import {debouncedRenderPictures} from './pictures.js';
 import {getRandomElement} from './utils.js';
+import {picturesElement} from './elements.js';
 
 const Filter = {
   DEFAULT: 'filter-default',
@@ -9,7 +10,6 @@ const Filter = {
 
 const COUNT_PHOTO = 10;
 
-const picturesElement = document.querySelector('.pictures');
 const filtersElement = document.querySelector('.img-filters');
 const formElement = document.querySelector('.img-filters__form');
 const buttonElements = document.querySelectorAll('.img-filters__button');

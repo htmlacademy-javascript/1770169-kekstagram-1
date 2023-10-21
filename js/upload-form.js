@@ -4,11 +4,10 @@ import {resetScale} from './scale.js';
 import {resetSlider} from './effects.js';
 import {sendData} from './api.js';
 import {showSuccessMessage, showErrorMessage} from './messages.js';
+import {bodyElement, formElement} from './elements.js';
 
 const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 
-const bodyElement = document.querySelector('body');
-const formElement = bodyElement.querySelector('.img-upload__form');
 const uploadFieldElement = formElement .querySelector('.img-upload__input');
 const uploadOverlayElement = formElement .querySelector('.img-upload__overlay');
 const closeButtonElement = uploadOverlayElement .querySelector('.img-upload__cancel');
