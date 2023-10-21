@@ -42,12 +42,15 @@ const closeImage = () => {
   formElement.removeEventListener('submit', formSubmitHandler);
 };
 
+const checkFileType = (file) => {
+  const fileName = file.name.toLowerCase();
+  return FILE_TYPES.some((type) => fileName.endsWith(type));
+};
+
 const uploadFieldChangeHandler = (evt) => {
   const file = evt.target.files[0];
-  const fileName = file.name.toLowerCase();
-  const isValid = FILE_TYPES.some((type) => fileName.endsWith(type));
 
-  if (isValid) {
+  if (checkFileType(file)) {
     imageURL = URL.createObjectURL(file);
     openImage();
   }

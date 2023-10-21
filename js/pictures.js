@@ -29,6 +29,6 @@ const renderPictures = (data) => {
   picturesElement.append(fragment);
 };
 
-const debouncedRenderPicture = debounce(renderPictures, DELAY);
+const debouncedRenderPictures = debounce(renderPictures, DELAY);
 
-export {debouncedRenderPicture, renderPictures};
+export {debouncedRenderPictures, renderPictures};

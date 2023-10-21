@@ -96,8 +96,8 @@ function effectChangeHandler (evt) {
 }
 
 const resetSlider = () => {
+  uploadImageElement.dataset.type = Effect.NONE;
   sliderElement.noUiSlider.updateOptions(EFFECT_CONFIG.none);
-  hideSlider();
 };
 
 const getFilterUnit = (filterType) => {

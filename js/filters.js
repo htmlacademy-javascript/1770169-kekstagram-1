@@ -1,10 +1,10 @@
-import {debouncedRenderPicture} from './pictures.js';
+import {debouncedRenderPictures} from './pictures.js';
 import {getRandomElement} from './utils.js';
 
 const Filter = {
-  FILTER_DEFAULT: 'filter-default',
-  FILTER_RANDOM: 'filter-random',
-  FILTER_DISCUSSED: 'filter-discussed',
+  DEFAULT: 'filter-default',
+  RANDOM: 'filter-random',
+  DISCUSSED: 'filter-discussed',
 };
 
 const COUNT_PHOTO = 10;
@@ -27,9 +27,9 @@ const sortPhotoComments = (firstElement, secondElement) => secondElement.comment
 const getTopDiscussedPhotos = (photos) => photos.slice().sort(sortPhotoComments);
 
 const getSortedPhotos = (filterType, photos) => {
-  if (filterType === Filter.FILTER_RANDOM) {
+  if (filterType === Filter.RANDOM) {
     return getRandomPhotos(photos);
-  } else if (filterType === Filter.FILTER_DISCUSSED) {
+  } else if (filterType === Filter.DISCUSSED) {
     return getTopDiscussedPhotos(photos);
   } else {
     return photos;
@@ -43,7 +43,7 @@ const filtersClickHandler = (evt, photos) => {
     buttonElements.forEach((element) => element.classList.remove('img-filters__button--active'));
     buttonElement.classList.add('img-filters__button--active');
     const sortedPhotos = getSortedPhotos(buttonElement.id, photos);
-    debouncedRenderPicture(sortedPhotos, picturesElement);
+    debouncedRenderPictures(sortedPhotos, picturesElement);
   }
 };
 
