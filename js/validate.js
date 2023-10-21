@@ -6,7 +6,6 @@ const Hashtag = {
 };
 const COMMENT_MAX_LENGTH = 140;
 
-//const formElement = document.querySelector('.img-upload__form');
 const hashtagsElement = formElement.querySelector('.text__hashtags');
 const commentElement = formElement.querySelector('.text__description');
 
@@ -74,5 +73,6 @@ pristine.addValidator(hashtagsElement, validateHashtagMatch,'Строка пос
 pristine.addValidator(commentElement, validateComments, `Длина комментария не может составлять больше ${COMMENT_MAX_LENGTH} символов!`);
 
 const checkFormValidity = () => pristine.validate();
+const resetPristine = () => pristine.reset();
 
-export {checkFormValidity};
+export {checkFormValidity, resetPristine};

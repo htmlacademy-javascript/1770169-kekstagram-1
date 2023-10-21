@@ -1,4 +1,4 @@
-import {checkFormValidity} from './validate.js';
+import {checkFormValidity, resetPristine} from './validate.js';
 import {isEscapeKey} from './utils.js';
 import {resetScale} from './scale.js';
 import {resetSlider} from './effects.js';
@@ -35,6 +35,7 @@ const closeImage = () => {
   formElement.reset();
   resetScale();
   resetSlider();
+  resetPristine();
   URL.revokeObjectURL(imageURL);
   closeButtonElement.removeEventListener('click', closeButtonClickHandler);
   document.removeEventListener('keydown', documentKeydownHandler);
