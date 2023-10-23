@@ -1,8 +1,9 @@
+import {uploadImageElement} from './elements.js';
+
 const scaleElement = document.querySelector('.img-upload__scale');
 const smallerButtonElement = scaleElement.querySelector('.scale__control--smaller');
 const biggerButtonElement = scaleElement.querySelector('.scale__control--bigger');
 const fieldElement = scaleElement.querySelector('.scale__control--value');
-const uploadImageElement = document.querySelector('.img-upload__preview img');
 
 const Scale = {
   STEP: 25,

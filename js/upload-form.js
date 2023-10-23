@@ -1,14 +1,13 @@
-import {checkFormValidity} from './validate.js';
+import {checkFormValidity, resetPristine} from './validate.js';
 import {isEscapeKey} from './utils.js';
 import {resetScale} from './scale.js';
 import {resetSlider} from './effects.js';
 import {sendData} from './api.js';
 import {showSuccessMessage, showErrorMessage} from './messages.js';
+import {bodyElement, formElement} from './elements.js';
 
 const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 
-const bodyElement = document.querySelector('body');
-const formElement = bodyElement.querySelector('.img-upload__form');
 const uploadFieldElement = formElement .querySelector('.img-upload__input');
 const uploadOverlayElement = formElement .querySelector('.img-upload__overlay');
 const closeButtonElement = uploadOverlayElement .querySelector('.img-upload__cancel');
@@ -36,18 +35,22 @@ const closeImage = () => {
   formElement.reset();
   resetScale();
   resetSlider();
+  resetPristine();
   URL.revokeObjectURL(imageURL);
   closeButtonElement.removeEventListener('click', closeButtonClickHandler);
   document.removeEventListener('keydown', documentKeydownHandler);
   formElement.removeEventListener('submit', formSubmitHandler);
 };
 
+const checkFileType = (file) => {
+  const fileName = file.name.toLowerCase();
+  return FILE_TYPES.some((type) => fileName.endsWith(type));
+};
+
 const uploadFieldChangeHandler = (evt) => {
   const file = evt.target.files[0];
-  const fileName = file.name.toLowerCase();
-  const isValid = FILE_TYPES.some((type) => fileName.endsWith(type));
 
-  if (isValid) {
+  if (checkFileType(file)) {
     imageURL = URL.createObjectURL(file);
     openImage();
   }

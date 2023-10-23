@@ -1,16 +1,14 @@
 import {renderComments} from './comments.js';
 import {renderBigPicture} from './big-picture.js';
 import {isEscapeKey, getItemById} from './utils.js';
+import {bodyElement, picturesElement, bigPictureElement} from './elements.js';
 
 const COMMENTS_COUNT = 5;
 let currentCount = COMMENTS_COUNT;
 let comments = [];
 
-const bodyElement = document.querySelector('body');
-const bigPictureElement = bodyElement.querySelector('.big-picture');
 const closeButtonElement = bigPictureElement.querySelector('.big-picture__cancel');
 const commentsLoaderElement = bigPictureElement.querySelector('.comments-loader');
-const picturesElement = bodyElement.querySelector('.pictures');
 
 const openPicture = (photo) => {
   comments = photo.comments;
