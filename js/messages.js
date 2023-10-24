@@ -1,16 +1,13 @@
 import {isEscapeKey} from './utils.js';
 import {bodyElement} from './elements.js';
 
+const DELAY = 3000;
+
 const errorTemplate = document.querySelector('#error').content.querySelector('.error');
 const successTemplate = document.querySelector('#success').content.querySelector('.success');
 
-const createMessage = (template) => {
-  const messageElement = template.cloneNode(true);
-  return messageElement;
-};
-
-const successMessage = createMessage(successTemplate);
-const errorMessage = createMessage(errorTemplate);
+const successMessage = successTemplate.cloneNode(true);
+const errorMessage = errorTemplate.cloneNode(true);
 
 const showSuccessMessage = () => {
   bodyElement.append(successMessage);
@@ -40,7 +37,7 @@ const showAlert = (errorText) => {
   alert.textContent = errorText;
   setTimeout(() => {
     alert.remove();
-  }, 3000);
+  }, DELAY);
   bodyElement.appendChild(alert);
 };
 

@@ -112,7 +112,7 @@ const getFilterUnit = (filterType) => {
 };
 
 sliderElement.noUiSlider.on('update', () => {
-  const value = parseFloat(sliderElement.noUiSlider.get());
+  const value = sliderElement.noUiSlider.get();
   const type = uploadImageElement.dataset.type;
 
   if (type === Effect.NONE) {

@@ -23,7 +23,7 @@ const getArrayFromString = (value) => value.trim().split(' ').filter((item) => i
 const validateHashtagCount = (value) => {
   const items = getArrayFromString(value);
 
-  return items.length < Hashtag.MAX_COUNT;
+  return items.length <= Hashtag.MAX_COUNT;
 };
 
 const validateHashtagLength = (value) => {
@@ -36,11 +36,7 @@ const validateHashtagUnique = (value) => {
   const items = getArrayFromString(value);
   const uniqueItems = new Set(items.map((item) => item.toLowerCase()));
 
-  if (items.length !== uniqueItems.size) {
-    return false;
-  }
-
-  return true;
+  return items.length === uniqueItems.size;
 };
 
 const validateHashtagOnly = (value) => {

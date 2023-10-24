@@ -1,3 +1,5 @@
+const DELAY = 500;
+
 const generateRandomNumber = (min, max) => {
   const minNumber = Math.ceil(Math.min(Math.abs(min), Math.abs(max)));
   const maxNumber = Math.floor(Math.max(Math.abs(min), Math.abs(max)));
@@ -12,7 +14,7 @@ const getItemById = (id, items) => items.find((item) => item.id === id);
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-const debounce = (callback, timeoutDelay = 500) => {
+const debounce = (callback, timeoutDelay = DELAY) => {
   let timeoutId;
 
   return (...args) => {

@@ -1,9 +1,6 @@
 import {debounce} from './utils.js';
 import {picturesElement} from './elements.js';
 
-const DELAY = 500;
-
-//const picturesElement = document.querySelector('.pictures');
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
 const getPictureElement = ({id, url, likes, comments, description}) => {
@@ -30,6 +27,6 @@ const renderPictures = (data) => {
   picturesElement.append(fragment);
 };
 
-const debouncedRenderPictures = debounce(renderPictures, DELAY);
+const debouncedRenderPictures = debounce(renderPictures);
 
 export {debouncedRenderPictures, renderPictures};
