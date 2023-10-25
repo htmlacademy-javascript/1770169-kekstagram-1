@@ -6,21 +6,21 @@ const DELAY = 3000;
 const errorTemplate = document.querySelector('#error').content.querySelector('.error');
 const successTemplate = document.querySelector('#success').content.querySelector('.success');
 
-const successMessage = successTemplate.cloneNode(true);
-const errorMessage = errorTemplate.cloneNode(true);
+const successElement = successTemplate.cloneNode(true);
+const errorElement = errorTemplate.cloneNode(true);
 
 const showSuccessMessage = () => {
-  bodyElement.append(successMessage);
-  const successButton = successMessage.querySelector('.success__button');
-  successButton.addEventListener('click', successButtonClickHandler);
+  bodyElement.append(successElement);
+  const successButtonElement = successElement.querySelector('.success__button');
+  successButtonElement.addEventListener('click', successButtonClickHandler);
   document.addEventListener('keydown', documentKeydownHandler);
   document.addEventListener('click', documentClickHandler);
 };
 
 const showErrorMessage = () => {
-  bodyElement.append(errorMessage);
-  const errorButton = errorMessage.querySelector('.error__button');
-  errorButton.addEventListener('click', errorButtonClickHandler);
+  bodyElement.append(errorElement);
+  const errorButtonElement = errorElement.querySelector('.error__button');
+  errorButtonElement.addEventListener('click', errorButtonClickHandler);
   document.addEventListener('keydown', documentKeydownHandler);
   document.addEventListener('click', documentClickHandler);
 };
@@ -42,26 +42,26 @@ const showAlert = (errorText) => {
 };
 
 function successButtonClickHandler () {
-  hideMessage(successMessage);
+  hideMessage(successElement);
 }
 
 function errorButtonClickHandler () {
-  hideMessage(errorMessage);
+  hideMessage(errorElement);
 }
 
 function documentKeydownHandler (evt) {
   if (isEscapeKey(evt)) {
-    if (bodyElement.contains(successMessage)) {
-      hideMessage(successMessage);
+    if (bodyElement.contains(successElement)) {
+      hideMessage(successElement);
       return;
     }
 
-    hideMessage(errorMessage);
+    hideMessage(errorElement);
   }
 }
 
 function documentClickHandler (evt) {
-  if (errorMessage === evt.target || successMessage === evt.target) {
+  if (errorElement === evt.target || successElement === evt.target) {
     hideMessage(evt.target);
   }
 }
