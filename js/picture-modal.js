@@ -13,6 +13,7 @@ const commentsLoaderElement = bigPictureElement.querySelector('.comments-loader'
 const openPicture = (photo) => {
   comments = photo.comments;
   renderBigPicture(photo);
+  clearComments();
   renderComments(comments, currentCount);
   bigPictureElement.classList.remove('hidden');
   bodyElement.classList.add('modal-open');
@@ -24,7 +25,6 @@ const closePicture = () => {
   bodyElement.classList.remove('modal-open');
   commentsLoaderElement.classList.remove('hidden');
   currentCount = COMMENTS_COUNT;
-  clearComments();
   document.removeEventListener('keydown', documentKeydownHandler);
 };
 
