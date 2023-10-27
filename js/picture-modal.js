@@ -1,4 +1,4 @@
-import {renderComments} from './comments.js';
+import {clearComments, renderComments} from './comments.js';
 import {renderBigPicture} from './big-picture.js';
 import {isEscapeKey, getItemById} from './utils.js';
 import {bodyElement, picturesElement, bigPictureElement} from './elements.js';
@@ -13,6 +13,7 @@ const commentsLoaderElement = bigPictureElement.querySelector('.comments-loader'
 const openPicture = (photo) => {
   comments = photo.comments;
   renderBigPicture(photo);
+  clearComments();
   renderComments(comments, currentCount);
   bigPictureElement.classList.remove('hidden');
   bodyElement.classList.add('modal-open');
