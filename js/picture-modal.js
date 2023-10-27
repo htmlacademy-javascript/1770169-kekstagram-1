@@ -1,4 +1,4 @@
-import {clearComment, renderComments} from './comments.js';
+import {clearComments, renderComments} from './comments.js';
 import {renderBigPicture} from './big-picture.js';
 import {isEscapeKey, getItemById} from './utils.js';
 import {bodyElement, picturesElement, bigPictureElement} from './elements.js';
@@ -24,7 +24,7 @@ const closePicture = () => {
   bodyElement.classList.remove('modal-open');
   commentsLoaderElement.classList.remove('hidden');
   currentCount = COMMENTS_COUNT;
-  clearComment();
+  clearComments();
   document.removeEventListener('keydown', documentKeydownHandler);
 };
 

@@ -34,9 +34,9 @@ const renderComments = (comments, countComments) => {
   commentsElement.append(fragment);
 };
 
-const clearComment = () => {
+const clearComments = () => {
   startIndex = 0;
   commentsElement.innerHTML = '';
 };
 
-export {renderComments, clearComment};
+export {renderComments, clearComments};
